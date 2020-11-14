@@ -6,8 +6,8 @@
 
 using namespace std;
 
-void ChangeIt_1(int n) {
- n = 5;
+void ChangeIt_1(int n) {  // question no.1: to change x in main(), this function must be --> int ChangeIt_1(int n){
+ n = 5;					  // and return the value of n.  --> return n;
 }
 void ChangeIt_2(int *n) {
  *n = 6;
@@ -19,12 +19,12 @@ int ChangeIt_4(int n) {
  n = 8;
  return n;
 }
-void swap(int *a, int *b){                  //question no 3 , a void swap function
+void swap(int *a, int *b){    //question no 3:  a void swap function
 	*a ^= *b;
 	*b ^= *a;
 	*a ^= *b;	
 }
-double getAverage(int *array, int SIZE){   // question no.4, function for double getAverage (int *array, int SIZE)
+double getAverage(int *array, int SIZE){ // question no.4: function for double getAverage (int *array, int SIZE)
 	int total = 0;
 		for (int count =0; count<SIZE;count++){
 			total=total + *(array + count);
@@ -49,6 +49,72 @@ main(){
  x = ChangeIt_4(x);
  cout << "ChangeIt_4 : " << *p << endl;
  
+ 
+ /*
+ 
+  1. Inspect the code and in your own interpretation, describe the reason call to function
+    ChangeIt_1(n) will not change x in main()?
+
+	 Inspection: 
+	 The call to function ChangeIt_1(n) will not change x in main() because 
+	 there is no returned value of n in the function ChangeIt_1 
+	 -->   return n;
+	 and variable x is not assigned to the function ChangeIt_1(n) in main() 
+	 -->   x = ChangeIt_1(x);
+	 
+	 Example:
+	 
+		 int ChangeIt_1(int n){
+		 	n = 5;
+		 	return n;
+		 }
+	 
+	 Example of calling function ChangeIt_1(n) that will change x in main():
+	 
+	 	x = ChangeIt_1(x);
+	 	cout << "ChangeIt_1 : " << *p << endl;
+	 	
+ 
+
+
+2. Inspect the code and in your own interpretation, describe the reason parameter n in
+	ChangeIt_2(int *n) is a pointer, and statement in the function is *n = 6 ?
+	
+		In order to find out the reason, we need to go backword and see why the output came like that;
+		
+		Output:
+		
+		ChangeIt_1 : 10
+		ChangeIt_2 : 6
+		ChangeIt_3 : 7
+		ChangeIt_4 : 8
+ 
+		
+		Based on the main function, 
+		1.)
+		
+			x=10
+			p=&x; 
+	 //Inspection: here value of x is assigned to a pointer p.
+			
+			ChangeIt_1(x); 
+	//Inspection: this is running the ChangeIt_1(x) function, however but 
+				  this function is not returning anything to pointer
+				  that is why cout << "ChangeIt_1 : " << *p << endl; 
+				  is printing 10 as x was assigned to p.
+		 
+		2.)
+			ChangeIt_2(&x);
+			cout << "ChangeIt_2 : " << *p << endl;
+			void ChangeIt_2(int *n) {
+			*n = 6;
+			}
+	// Inspection: We can see that value of the pointer is set as 6 in function and it
+				   when printed out in the main function, it will print 6. 
+			cout << "ChangeIt_2 : " << *p << endl; 
+			
+*/
+ 
  /* 3. Write a function called void swap with two parameters, which will receive the address
     of x and y as pointer. The function should swap the value of x and y only if x is larger than
     y. Print the value of x and y after the function call.
@@ -65,8 +131,13 @@ main(){
         value from this function. Always use *array rather than subscript to access the array
         value
   */
-  
   int *array = data;
   cout<<"\nAverage of value is " << getAverage(array,SIZE)<< endl;
 }
+
+
+
+
+
+
 
