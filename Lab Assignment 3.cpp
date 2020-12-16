@@ -7,7 +7,7 @@
 
 using namespace std; 
   
-// isBracketBalanced() is to check if brackets are balanced 
+// isBracketBalanced() is to check if input brackets are balanced 
 bool isBracketBalanced(string input) 
 {   
     stack<char> s; 
